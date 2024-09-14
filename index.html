@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlimited Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <header><a href="#"><span>Unlimited</span>-Store</a></header>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <img src="./assets/cart.png" alt="cart">
+    </nav>
+
+    <!-- Gallery Banner -->
+    <section>
+        <div>
+            <h2>Shop With Unlimited-Store,<br/> Enjoy Now!</h2>
+            <button>Get started</button>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2>See New Arrivals!</h2>
+        <div id="product-grid" class="product-grid"></div>
+    </div>
+
+    <footer>
+        <div>
+            <header class="header"><a href="#"><span>Unlimited</span>-Store</a></header>
+            <p>LINKS</p>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <span>&copy; 2024 Unlimited-Store. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script>
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(data => {
+                const productGrid = document.getElementById('product-grid');
+                productGrid.innerHTML = data.map(product => `
+                    <div class="card">
+                        <img src="${product.image}" alt="${product.title}">
+                        <div class="card-body">
+                            <h3>${product.title}</h3>
+                            <p>${product.description.substring(0, 100)}...</p>
+                            <p><strong>$${product.price}</strong></p>
+                        </div>
+                    </div>
+                `).join('');
+            })
+            .catch(error => console.error('Error fetching products:', error));
+    </script>
+</body>
+</html>
